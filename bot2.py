@@ -1,6 +1,6 @@
 import telebot
 
-bot = telebot.TeleBot('***')
+bot = telebot.TeleBot('')
 
 @bot.message_handler(content_types=['voice'])
 def voice_handler(message):

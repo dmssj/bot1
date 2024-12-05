@@ -1,21 +1,15 @@
 import telebot
-import requests
+import random
 
-bot = telebot.TeleBot('***')
+bot = telebot.TeleBot('')
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, "Напиши 'запрос', чтобы получить данные.")
+    bot.send_message(message.chat.id, "Напиши 'картинка', и я отправлю тебе случайное изображение.")
 
-@bot.message_handler(func=lambda message: message.text == "запрос")
-def get_api_data(message):
-    # Новый сайт для запроса
-    response = requests.get("https://jsonplaceholder.typicode.com/users/1")
-    if response.status_code == 200:
-        data = response.json()
-        email = data['email']  # Извлечение почты пользователя
-        bot.send_message(message.chat.id, f"Email пользователя: {email}")
-    else:
-        bot.send_message(message.chat.id, "Ошибка при запросе данных.")
+@bot.message_handler(func=lambda message: message.text.lower() == "картинка")
+def send_random_image(message):
+    image_url = f"https://picsum.photos/seed/{random.randint(1, 10000)}/200/300"
+    bot.send_photo(message.chat.id, image_url, caption="Вот случайная картинка для тебя!")
 
 bot.polling()
