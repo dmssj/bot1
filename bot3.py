@@ -29,7 +29,7 @@ def conversation(message):
             bot.send_message(chat_id, f"Тебе {message.text} лет. Чем ты увлекаешься?")
             user_data[chat_id]['step'] = 3
         else:
-            bot.send_message(chat_id, "Пожалуйста, напиши возраст числом.")
+            bot.send_message(chat_id, "напиши возраст числом.")
 
     elif step == 3:
         user_data[chat_id]['hobby'] = message.text
